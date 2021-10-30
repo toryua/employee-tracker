@@ -1,18 +1,18 @@
+--  put into functions to export
 SELECT
-    department.department_name AS department_name,
-    role.department_id AS department_id
+    department.department_name AS department,
 FROM
     department
-JOIN    
-    role ON department.department_id = role.department_id;
+LEFT JOIN    
+    companyRole ON department.department_id = companyRole.department_id;
 
 SELECT
     employees.role_id AS role_id, 
-    role.id AS id
+    companyRole.id AS id
 FROM
     employees
 JOIN 
-    role ON employees.role_id = role.role_id;
+    companyRole ON employees.role_id = companyRole.role_id;
 
 -- SELECT
 --     employees.manager_id AS manager_id,
