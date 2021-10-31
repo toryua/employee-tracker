@@ -18,7 +18,7 @@ class DB {
     };
     viewAllRoles() {
         return this.connection.promise().query(
-            'SELECT companyRole.title, companyRole.salary, department.department_name AS department FROM companyRole LEFT JOIN department ON companyRole.department_id = department.id').then(([results]) => {
+            'SELECT companyRole.id, companyRole.title, companyRole.salary, department.department_name AS department FROM companyRole LEFT JOIN department ON companyRole.department_id = department.id').then(([results]) => {
                 console.table(results);
         });
     };
@@ -30,12 +30,12 @@ class DB {
         });
     };
 
-    updateRole(role) {
+    updateRole() {
         return this.connection.promise().query(
-            'UPDATE companyRole SET companyRole.title WHERE ' + (role), role
-
-        )
-    }
+            'UPDATE employees SET employees.role_id = role_id WHERE employees.id').then(([results]) => {
+                console.table(results);
+            })
+        }
 
     addEmployee(added) {
         return this.connection.promise().query(

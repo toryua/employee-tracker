@@ -21,8 +21,10 @@ employeePrompts = () => {
             switch (data.initialPrompt) {
                 case 'View All Departments':
                     db.viewAllDepartments().then(data => {
-                        console.table(data)
+                        console.table(data);
+                        
                     })
+                    
                     break;
                 case 'View All Roles':
                     db.viewAllRoles().then(data => {
@@ -136,7 +138,7 @@ employeePrompts = () => {
                     inquirer.prompt([
                         {
                             type: 'input',
-                            name: 'employeeId',
+                            name: 'employees.id',
                             message: 'Which employee ID do you want to update?'
                         },
                         {
@@ -154,16 +156,36 @@ employeePrompts = () => {
                     ])
                     .then((answer) => {
                         console.log(answer)
-                        return this.connection.promise(answer).query(
-                                'UPDATE employees SET role_id = role_id WHERE ' + employeeId, answer
-                        )
+                        db.updateRole().then(data => {
+                            console.table(data)
+                        })
                         })
                     .then(data => {
                             console.table(data)
                         })    
                     })}
                     }
-                )}
+                )
+}
+// repeatPrompt = () => {
+//     inquirer.prompt ([
+//                 { 
+//                     type: "list",
+//                     name: "repeat",
+//                     message: "Would you like to go again?",
+//                     choices: ['Yes', 'No']
+//                 }
+//                 .then(data => {
+//                     switch (data.repeat) {
+//                         case 'Yes':
+//                             employeePrompts();
+//                         break;
+//                         case 'No':
+//                             console.log('Goodbye.');
+//                         break;
+//                     }}
+//             )])
+
 
 
 
